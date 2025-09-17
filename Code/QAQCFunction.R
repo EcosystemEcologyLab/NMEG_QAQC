@@ -1,11 +1,11 @@
-qa_qc_heights_final <- function(df) {
+qa_qc_heights_final <- function(df, threshold) {
   library(dplyr)
   
   classify_increment <- function(x) {
     if (is.na(x)) return(NA)
-    if (x > 0.4) return("Pos")
+    if (x > threshold) return("Pos")
     if (x > 0) return("Pos_Stag")
-    if (x < -0.4) return("Neg")
+    if (x < -threshold) return("Neg")
     if (x < 0) return("Neg_Stag")
     return("Zero")
   }
