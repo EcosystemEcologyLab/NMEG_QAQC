@@ -67,38 +67,48 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>We explored removing data from tree height observations based on directional and magnitude-based flag rules described below for Ponderosa Pines above 3m at the PPine site circle plots in order to improve the overall quality of the dataset.</p>
+<p>We explored the impacts of removing data from tree height observations using directional and magnitude-based flag rules for Ponderosa Pines above 3m at PPine (US-Vcp) circle plots. The objective of this exploration was to create flagging rules capable of being applied to many sites and many different types of surveyed vegetation in order to clean up and improve the overall quality of the dataset. This report reviews</p>
+<ol type="1">
+<li><p>Flagging rules used</p></li>
+<li><p>Examples of how which data are flagged</p></li>
+<li><p>Impacts of applying a highly stringent threshold (0.4m)</p></li>
+<li><p>Impacts of a suite of standard deviation-based thresholds</p></li>
+</ol>
 <section id="flagging-rules" class="level2">
 <h2 class="anchored" data-anchor-id="flagging-rules">Flagging Rules</h2>
-<p>To evaluate the reliability of annual tree height measurements, we applied a three-point growth increment check to individual trees’ height time series. For three consecutive observations (not necessarily consecutive years), we calculated the associated height growth increments and classified them according to their magnitude and direction:</p>
+<p>To evaluate the reliability of annual tree height measurements, we applied a three-point growth increment check to individual trees’ height time series. For three consecutive observations (not necessarily consecutive years), we calculated the associated height growth increments and classified them according to their magnitude and direction (Pos = positive, Neg = negative, Stag = effectively stagnant):</p>
 <ul>
-<li><p><strong>Pos:</strong> increase in height greater than 0.4 m</p></li>
-<li><p><strong>Pos_Stag:</strong> increase in height at or below 0.4 m</p></li>
-<li><p><strong>Neg:</strong> decrease in height less than -0.4 m</p></li>
-<li><p><strong>Neg_Stag:</strong> decrease in height at or above -0.4 m</p></li>
+<li><p><strong>Pos:</strong> increase in height greater than the threshold</p></li>
+<li><p><strong>Pos_Stag:</strong> increase in height at or below the threshold</p></li>
+<li><p><strong>Neg:</strong> decrease in height less than the negative threshold</p></li>
+<li><p><strong>Neg_Stag:</strong> decrease in height at or above the negative threshold</p></li>
 </ul>
-<p>Once the growth increments were classified using the above thresholds, we determined if the center point in the three-point window should be flagged. If the first point in the three-point window was already flagged, we use the point preceding as point one instead. To summarize, the center point only has the potential to be flagged if the sign of the growth increment (positive to negative or negative to positive) and the magnitude of both is substantial (&gt;0.4m). Thus, out of all the combinations of the above increment types, only Pos –&gt;Neg and Neg–&gt;Pos have the potential to be flagged as the following:</p>
+<p>Determining what height increment threshold to use is difficult: sporadic growth patterns can reflect erroneous field measurements (especially as tree heights become larger or where terrain is complex), real (but surprising) tree growth responses to environmental conditions, or both. The distribution of height increments for this dataset is a normal distribution centered around 0m with a standard deviation (SD) of 1m. Annually, growth increment distributions are generally normal distributions centered around zero. Distributions from 2014-2019 have less spread while 2010-2013 show a wider spread of growth increments. We test a highly exclusive threshold of 0.4m (40% of one SD) as well as a suite of thresholds including 0.5m, 1m, 1.5m, and 2m.</p>
+<p><img src="images/incrDistrib.svg" class="img-fluid"></p>
+<p>Once the growth increments were classified using the growth increment thresholds described, we determined if the center point in the three-point window should be flagged. If the first point in the three-point window was already flagged, we use the point preceding as point one instead. To summarize, the center point only has the potential to be flagged if the sign of the growth increment (positive to negative or negative to positive) and the magnitude of both is substantial (&gt;0.4m). Thus, out of all the combinations of the above increment types, only Pos –&gt;Neg and Neg–&gt;Pos have the potential to be flagged as the following:</p>
 <ul>
-<li><p><strong>Anomalous Incline</strong>: Pos–&gt;Neg growth increment pattern</p></li>
-<li><p><strong>Majority Dead:</strong> If an individual is over 50% dead, flag growth over 0.5m.</p></li>
-<li><p><strong>Anomalous Decline</strong>: Neg–&gt;Pos growth increment pattern where the percent dead increment between the first and second point is less than a 10% increase.</p></li>
+<li><p><strong>Anomalous Incline</strong>: flag the center point in a Pos–&gt;Neg growth increment pattern.</p></li>
+<li><p><strong>Majority Dead:</strong> flag growth over 0.5m if an individual is over 50% dead.</p></li>
+<li><p><strong>Anomalous Decline</strong>: flag the center point in a Neg–&gt;Pos growth increment pattern where the percent dead increment between the first and second point is less than a 10% increase.</p></li>
 </ul>
 <p>We employed an additional rule to flag impossible growth in trees:</p>
 <ul>
 <li><strong>Dead Tree:</strong> If an individual is 100% dead, flag subsequent years where height increases.</li>
 </ul>
-<p><img src="images/ExampleTreePlot.svg" class="img-fluid"></p>
+<p>For a threshold of 0.4m, 83% of the trees (64 out of 77 trees) are flagged at least one time. The maximum amount of flags applied to a tree was five flags over 14 years.</p>
+<p><img src="images/nowplot.svg" class="img-fluid"></p>
+<p>The following plots show an example time series for each flagging group.</p>
+<p><img src="images/block1.svg" class="img-fluid"></p>
+<p><img src="images/block2.svg" class="img-fluid"></p>
+<p><img src="images/block3.svg" class="img-fluid"></p>
 </section>
 <section id="impacts-of-removed-data" class="level2">
 <h2 class="anchored" data-anchor-id="impacts-of-removed-data">Impacts of Removed Data</h2>
-<p>Data was flagged and removed from every year except for the beginning (2007), end (2025), and missing years (2015, 2017, and 2020). 2010 and 2013 had the most flagged data, the majority of which were anomalous inclines. However, on average, about 15% of mature tree heights are flagged per year.</p>
-<p><img src="images/FlagTypes.svg" class="img-fluid">The annual distribution and overall distributions of heights between the two datasets don’t noticeably vary.</p>
-<p><img src="images/AnnualBoxplots.svg" class="img-fluid" width="606"></p>
-<p><img src="images/HeightDistrib.svg" width="657" height="379"></p>
-<p>There is an overall decrease in the annual mean height when flagged trees are removed from the data.</p>
-<p><img src="images/MeanComp-01.svg" class="img-fluid" width="587"></p>
-<p>However, there is a slight decrease in height variation per tree record.</p>
-<p><img src="images/IndvTreeCVDistrib.svg" class="img-fluid"></p>
+<p>Using the 0.4m threshold, data was flagged and removed from every year except for the beginning (2007), end (2025), and missing years (2015, 2017, and 2020). 2010 and 2013 had the most flagged data, the majority of which were anomalous inclines. On average, about 15% of mature tree heights are flagged per year.</p>
+<p><img src="images/FlagTypes.svg" width="688" height="376">The annual and overall distributions of heights between the two datasets do not noticeably vary even with the strict threshold.</p>
+<p><img src="images/0.4compareBoxDensity.svg" class="img-fluid"></p>
+<p>Lastly, we investigate a suite of threshold values ranging from half a SD (0.5m) to two SDs (2m). For every threshold value, there is a decrease in height variation per tree time series. For thresholds below 1m, there is a decrease in the annual mean height when flagged trees are removed from the data. The 1m threshold stay at or slightly below the annual means of the raw data. The thresholds above 1m stay at or slightly above the annual means of the raw data.</p>
+<p><img src="images/combdSuite.svg" class="img-fluid" width="734"></p>
 </section>
 
 </main>
