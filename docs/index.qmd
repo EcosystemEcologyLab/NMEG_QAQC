@@ -72,7 +72,9 @@ The following plots show an example time series for each flagging group.
 
 Using the 0.4m threshold, data was flagged and removed from every year except for the beginning (2007), end (2025), and missing years (2015, 2017, and 2020). 2010 and 2013 had the most flagged data, the majority of which were anomalous inclines. On average, about 15% of mature tree heights are flagged per year.
 
-![](images/FlagTypes.svg){width="688" height="376"}The annual and overall distributions of heights between the two datasets do not noticeably vary even with the strict threshold.
+![](images/FlagTypes.svg){width="688" height="376"}
+
+The annual and overall distributions of heights between the two datasets do not noticeably vary even with the strict threshold.
 
 ![](images/0.4compareBoxDensity.svg)
 
