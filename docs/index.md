@@ -18,6 +18,8 @@ execute:
   execute-dir: project
 ---
 
+
+
 We explored removing data from tree height observations based on directional and magnitude-based flag rules described below for Ponderosa Pines above 3m at the PPine site circle plots in order to improve the overall quality of the dataset.
 
 ## Flagging Rules
@@ -28,14 +30,22 @@ To evaluate the reliability of annual tree height measurements, we applied a thr
 
 -   **Pos_Stag:** increase in height at or below 0.4 m
 
-```{=html}
-<!-- -->
-```
--   **Neg:** decrease in height less than -0.4 m
+
 
 ```{=html}
 <!-- -->
 ```
+
+
+-   **Neg:** decrease in height less than -0.4 m
+
+
+
+```{=html}
+<!-- -->
+```
+
+
 -    **Neg_Stag:** decrease in height at or above -0.4 m
 
 Once the growth increments were classified using the above thresholds, we determined if the center point in the three-point window should be flagged. If the first point in the three-point window was already flagged, we use the point preceding as point one instead. To summarize, the center point only has the potential to be flagged if the sign of the growth increment (positive to negative or negative to positive) and the magnitude of both is substantial (\>0.4m). Thus, out of all the combinations of the above increment types, only Pos --\>Neg and Neg--\>Pos have the potential to be flagged as the following:
