@@ -25,6 +25,6 @@ plot_qaqc_single <- function(df, tree_id) {
     geom_point(data = subset(tree_data, !is.na(Flag)), color = "red", size = 4) +
     geom_text(data = subset(tree_data, !is.na(Flag)), aes(label = Flag), vjust = -1, size = 3, color = "red") +
     scale_color_manual(values = c("TRUE" = "black", "FALSE" = "red"), guide = "none") +
-    labs(title = paste("QA/QC - Tree", tree_id), x = "Year", y = "Height (m)") +
+    labs(title = paste("Tree", tree_id), x = "", y = "Height (m)") +
     theme_minimal(base_size = 12)
 }
